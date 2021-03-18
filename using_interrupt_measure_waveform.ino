@@ -39,10 +39,8 @@ uint32_t period_total;
 void loop() {
   if (have_detected) {
     if (detect_high) {
-      detected_high = millis();
       period_high =  detected_high - detected_low;
     } else {
-      detected_low = millis();
       period_low =  detected_low - detected_high;      
     }
     period_total = period_high + period_low;
@@ -56,8 +54,10 @@ void loop() {
 
 void isr () {
   if (digitalRead(INPUT_PIN)) {
-    detect_high = true;
+    detected_high = millis();
+    detect_high = true;    
   } else {
+    detected_low = millis();
     detect_high = false;
   }
   have_detected = true;
