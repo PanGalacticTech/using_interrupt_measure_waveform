@@ -45,6 +45,8 @@ void loop() {
     }
     period_total = period_high + period_low;
     Serial.println(period_total);
+    float dutyCycle = period_total/period_high;
+    Serial.println(dutyCycle);
     have_detected = false;
   }
 }
